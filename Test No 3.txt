@@ -1,0 +1,25 @@
+SELECT 
+    Pekerjaan,
+    CASE 
+        WHEN TIMESTAMPDIFF(YEAR, STR_TO_DATE(TanggalLahir, '%Y%m%d'), CURDATE()) <= 14 THEN '01'
+        WHEN TIMESTAMPDIFF(YEAR, STR_TO_DATE(TanggalLahir, '%Y%m%d'), CURDATE()) BETWEEN 15 AND 19 THEN '02'
+        WHEN TIMESTAMPDIFF(YEAR, STR_TO_DATE(TanggalLahir, '%Y%m%d'), CURDATE()) BETWEEN 20 AND 24 THEN '03'
+        WHEN TIMESTAMPDIFF(YEAR, STR_TO_DATE(TanggalLahir, '%Y%m%d'), CURDATE()) BETWEEN 25 AND 29 THEN '04'
+        WHEN TIMESTAMPDIFF(YEAR, STR_TO_DATE(TanggalLahir, '%Y%m%d'), CURDATE()) BETWEEN 30 AND 34 THEN '05'
+        WHEN TIMESTAMPDIFF(YEAR, STR_TO_DATE(TanggalLahir, '%Y%m%d'), CURDATE()) BETWEEN 35 AND 39 THEN '06'
+        WHEN TIMESTAMPDIFF(YEAR, STR_TO_DATE(TanggalLahir, '%Y%m%d'), CURDATE()) BETWEEN 40 AND 44 THEN '07'
+        WHEN TIMESTAMPDIFF(YEAR, STR_TO_DATE(TanggalLahir, '%Y%m%d'), CURDATE()) BETWEEN 45 AND 49 THEN '08'
+        WHEN TIMESTAMPDIFF(YEAR, STR_TO_DATE(TanggalLahir, '%Y%m%d'), CURDATE()) BETWEEN 50 AND 54 THEN '09'
+        WHEN TIMESTAMPDIFF(YEAR, STR_TO_DATE(TanggalLahir, '%Y%m%d'), CURDATE()) BETWEEN 55 AND 59 THEN '10'
+        ELSE '11'
+    END AS KelompokUsia,
+    COUNT(*) AS Total
+FROM 
+    data_nasabah
+WHERE 
+    STR_TO_DATE(TanggalLahir, '%Y%m%d') IS NOT NULL 
+    OR TanggalLahir = '19900101'
+GROUP BY 
+    Pekerjaan, KelompokUsia
+ORDER BY 
+    Pekerjaan, KelompokUsia;
