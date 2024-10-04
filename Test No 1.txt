@@ -1,0 +1,12 @@
+SELECT 
+    dc3.nama AS cabkor, 
+    dc1.nama AS cabang, 
+    dc2.nama AS unit_kerja
+FROM 
+    data_cabang dc1
+LEFT JOIN 
+    data_cabang dc2 ON dc2.induk = dc1.id
+LEFT JOIN
+    data_cabang dc3 ON dc3.id = dc1.induk
+ORDER BY 
+    dc1.id;
