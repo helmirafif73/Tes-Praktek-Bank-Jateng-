@@ -1,0 +1,12 @@
+SELECT 
+    IdNasabah, 
+    KodeCabang, 
+    NamaNasabah, 
+    TanggalLahir,
+    CASE 
+        WHEN STR_TO_DATE(TanggalLahir, '%Y%m%d') IS NOT NULL 
+        THEN 'True' 
+        ELSE 'False' 
+    END AS CekTanggal
+FROM 
+    data_nasabah;
